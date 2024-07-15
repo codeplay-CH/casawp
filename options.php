@@ -1068,7 +1068,13 @@
 											<?php $finalArray[$field['field']]['label'] = $field['label'] ?>
 										<?php endforeach ?>
 
-										<?php usort($finalArray, function ($a, $b) { return $a['order'] - $b['order']; }); ?>
+										<?php
+										usort($finalArray, function ($a, $b) {
+											$orderA = isset($a['order']) ? (float)$a['order'] : 0;
+											$orderB = isset($b['order']) ? (float)$b['order'] : 0;
+											return $orderA - $orderB;
+										});
+										?>
 
 										<?php foreach ($finalArray as $field): ?>
 											<div class="draggable-list-item" id="<?php echo $field['field'] ?>">
